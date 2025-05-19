@@ -12,7 +12,7 @@
       <div class="top-buttons">
         <button class="icon-button" @click="toggleSidebar" data-tooltip="Cerrar barra lateral">
           <i class="fas fa-bars"></i>
-        </button>Pero 
+        </button>
 
         <div class="spacer"></div>
 

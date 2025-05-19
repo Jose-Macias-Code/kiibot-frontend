@@ -39,15 +39,15 @@
             v-if="hoveredMessageId === msg.id && editingMessageId !== msg.id"
             :class="['message-actions', msg.role === 'user' ? 'user-actions' : 'bot-actions']"
           >
-            <button class="action-btn" title="Copiar" @click="copyMessage(msg)">
+            <button class="action-btn hide-on-mobile" title="Copiar" @click="copyMessage(msg)">
               <i :class="copiedMessageId === msg.id ? 'fas fa-check' : 'fas fa-copy'"></i>
             </button>
 
-            <button v-if="msg.role === 'user'" class="action-btn" title="Editar" @click="startEditing(msg)">
+            <button v-if="msg.role === 'user'" class="action-btn hide-on-mobile" title="Editar" @click="startEditing(msg)">
               <i class="fas fa-edit"></i>
             </button>
 
-            <template v-if="msg.role === 'user' && msg.versions.length > 1">
+            <!-- <template v-if="msg.role === 'user' && msg.versions.length > 1">
               <button class="action-btn" @click="previousVersion(msg)" :disabled="msg.activeVersion === 0">
                 <i class="fas fa-chevron-left"></i>
               </button>
@@ -57,7 +57,7 @@
               <button class="action-btn" @click="nextVersion(msg)" :disabled="msg.activeVersion === msg.versions.length - 1">
                 <i class="fas fa-chevron-right"></i>
               </button>
-            </template>
+            </template> -->
           </div>
         </transition>
       </div>
@@ -120,45 +120,80 @@ export default {
       editingText: '',
       activeFlowIndex: 0,
       flows: [
-        [
-          {
-            id: 'msg1',
-            role: 'user',
-            versions: [
-              { content: '<p>Hola, ¿qué tal?</p>' },
-              { content: '<p>Buenas tardes, ¿me puedes ayudar?</p>' }
-            ],
-            activeVersion: 0
-          },
-          {
-            id: 'msg2',
-            role: 'bot',
-            versions: [
-              { content: '<p>¡Hola! 👋 Estoy muy bien, ¿en qué puedo ayudarte hoy?</p>' },
-              { content: '<p>¡Buenas tardes! Claro, dime en qué necesitas ayuda.</p>' }
-            ],
-            activeVersion: 0
-          },
-          {
-            id: 'msg3',
-            role: 'user',
-            versions: [
-              { content: '<p>Quisiera saber sobre tu servicio.</p>' },
-              { content: '<p>Me interesa saber los precios.</p>' }
-            ],
-            activeVersion: 0
-          },
-          {
-            id: 'msg4',
-            role: 'bot',
-            versions: [
-              { content: '<p>Por supuesto, ofrecemos distintos servicios. ¿Qué área te interesa?</p>' },
-              { content: '<p>Claro, te paso los precios: Plan básico $50, Plan premium $100.</p>' }
-            ],
-            activeVersion: 0
-          }
-        ]
-      ]
+  [
+    {
+      id: 'msg1',
+      role: 'user',
+      versions: [
+        { content: '<p>Hola, ¿cómo funciona este sistema?</p>' }
+      ],
+      activeVersion: 0
+    },
+    {
+      id: 'msg2',
+      role: 'bot',
+      versions: [
+        { content: '<p>Hola 👋 Este chat te permite enviar mensajes, editarlos y ver el historial de versiones.</p>' }
+      ],
+      activeVersion: 0
+    },
+    {
+      id: 'msg3',
+      role: 'user',
+      versions: [
+        { content: '<p>¿Qué tipo de contenido acepta?</p>' }
+      ],
+      activeVersion: 0
+    },
+    {
+      id: 'msg4',
+      role: 'bot',
+      versions: [
+        { content: `<p>Puedes escribir texto normal, incluir listas, fragmentos de código y hasta fórmulas matemáticas usando KaTeX.</p>` }
+      ],
+      activeVersion: 0
+    },
+    {
+      id: 'msg5',
+      role: 'user',
+      versions: [
+        { content: '<p>¿Y cómo se ve un bloque de código?</p>' }
+      ],
+      activeVersion: 0
+    },
+    {
+  id: 'msg6',
+  role: 'bot',
+  versions: [
+    {
+      content: `<pre><div class="code-lang">js</div><code>function saludar(nombre) {
+  return \`Hola, \${nombre}!\`;
+}</code></pre>`
+    }
+  ],
+  activeVersion: 0
+},
+    {
+      id: 'msg7',
+      role: 'user',
+      versions: [
+        { content: '<p>¿Puedo usar listas?</p>' }
+      ],
+      activeVersion: 0
+    },
+    {
+      id: 'msg8',
+      role: 'bot',
+      versions: [
+        { content: `<ul>
+  <li>✅ Sí, listas ordenadas y desordenadas.</li>
+  <li>✅ También puedes usar texto <strong>en negrita</strong> o <em>cursiva</em>.</li>
+</ul>` }
+      ],
+      activeVersion: 0
+    },
+  ]
+]
     };
   },
   mounted() {
@@ -339,20 +374,27 @@ export default {
         pre.appendChild(btn);
       });
     },
-
-    // Acciones 
     copyMessage(msg) {
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = msg.formattedContent;
-      const text = tempDiv.innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        this.copiedMessageId = msg.id;
-        setTimeout(() => {
-          this.copiedMessageId = null;
-        }, 500);
-      }).catch(err => {
-        console.error('Error al copiar', err);
-      });
+      try {
+        const html = msg.versions?.[msg.activeVersion]?.content || msg.content || '';
+        console.log("Intentando copiar:", html);
+
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        const text = tempDiv.innerText;
+
+        navigator.clipboard.writeText(text).then(() => {
+          console.log("Texto copiado:", text);
+          this.copiedMessageId = msg.id;
+          setTimeout(() => {
+            this.copiedMessageId = null;
+          }, 500);
+        }).catch(err => {
+          console.error('Error al copiar al portapapeles:', err);
+        });
+      } catch (e) {
+        console.error('Excepción inesperada en copyMessage:', e);
+      }
     },
     startEditing(msg) {
       this.editingMessageId = msg.id;
@@ -954,6 +996,12 @@ del {
     width: 100%;
     padding: 8px 12px;
     font-size: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hide-on-mobile {
+    display: none !important;
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="main-layout">
     <div
-      v-if="isSidebarOpen"
+      v-if="isSidebarOpen && isMobile"
       class="sidebar-backdrop"
       @click="toggleSidebar"
     ></div>
@@ -40,12 +40,16 @@ export default {
     return {
       isSidebarOpen: true,
       showSessionExpiredModal: false,
+      isMobile: window.innerWidth <= 640
     };
   },
   methods: {
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen;
-      if (this.isSidebarOpen) {
+
+      const isMobile = window.innerWidth <= 640;
+
+      if (isMobile && this.isSidebarOpen) {
         document.documentElement.style.overflow = 'hidden';
         document.body.style.cssText = `
           overflow: hidden !important;
@@ -65,14 +69,20 @@ export default {
     redirectToLogin() {
       this.showSessionExpiredModal = false;
       this.$router.push("/login");
-    }
+    },
+    updateIsMobile() {
+      this.isMobile = window.innerWidth <= 640;
+    },
   },
   mounted() {
     window.addEventListener("token-expired", this.handleTokenExpired);
-    if (this.isSidebarOpen) this.toggleSidebar();
+    window.addEventListener("resize", this.updateIsMobile);
+
+    if (this.isMobile && this.isSidebarOpen) this.toggleSidebar();
   },
   beforeUnmount() {
     window.removeEventListener("token-expired", this.handleTokenExpired);
+    window.removeEventListener("resize", this.updateIsMobile);
     document.documentElement.style.overflow = '';
     document.body.style.cssText = '';
   },
