@@ -306,10 +306,17 @@ export default {
 </script>
 
 <style scoped>
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .profile-page {
-  max-width: 1000px;
-  margin: 1rem auto;
-  padding: 30px;
+  max-width: 100%;
+  padding: 16px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow-x: hidden;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -810,8 +817,8 @@ export default {
 @media screen and (max-width: 768px) {
   .profile-header {
     flex-direction: column;
-    gap: 20px;
-    padding: 20px;
+    gap: 16px;
+    padding: 14px;
   }
 
   .profile-photo {
@@ -860,7 +867,7 @@ export default {
 
 @media screen and (max-width: 480px) {
   .metric-card {
-    padding: 22px 14px;
+    padding: 16px 14px;
   }
 
   .metric-card .icon {
@@ -883,5 +890,19 @@ export default {
   .logout-modal p {
     font-size: 18px;
   }
+}
+
+body {
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
+  width: 100vw;
+}
+
+* {
+  box-sizing: border-box;
+  max-width: 100%;
 }
 </style>

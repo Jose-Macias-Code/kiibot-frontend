@@ -7,7 +7,7 @@
       <i class="fas fa-info-circle"></i>
       <div class="tooltip-content">
         <strong>Credenciales de prueba:</strong><br>
-        Correo: <code>admin@kiibot.com</code><br>
+        Correo: <code>admin@gmail.com</code><br>
         Contraseña: <code>123456</code>
       </div>
     </div>
@@ -71,7 +71,7 @@
 
 <script>
 const fake_user = {
-  email: "admin@kiibot.com",
+  email: "admin@gmail.com",
   password: "123456",
   name: "Jose",
   role: "admin",
