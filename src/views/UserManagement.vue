@@ -71,14 +71,16 @@
       </small>
     </div>
 
-    <UserActionsModal
-      :user="selectedUser"
-      :isOpen="showUserActionsModal"
-      @close="showUserActionsModal = false"
-      @change-password="handlePasswordChange"
-      @change-role="handleRoleChange"
-      @delete-user="handleUserDelete"
-    />
+    <div :class="{ 'modal-blur': showUserActionsModal }">
+      <UserActionsModal
+        :user="selectedUser"
+        :isOpen="showUserActionsModal"
+        @close="showUserActionsModal = false"
+        @change-password="handlePasswordChange"
+        @change-role="handleRoleChange"
+        @delete-user="handleUserDelete"
+      />
+    </div>
 
     <AddUserModal
       :is-open="showAddUserModal"
@@ -336,8 +338,6 @@ export default {
   font-size: 0.95rem;
   padding: 1.1rem 1rem;
   text-align: left;
-  position: sticky;
-  top: 0;
   z-index: 1;
   border-bottom: 2px solid #e5e7eb;
 }
@@ -711,4 +711,21 @@ export default {
   }
 }
 
+.user-management-container {
+  height: 80%;
+  box-sizing: border-box;
+  padding: 0 2rem;
+  font-family: 'Inter', sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.modal-blur::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 998;
+}
 </style>

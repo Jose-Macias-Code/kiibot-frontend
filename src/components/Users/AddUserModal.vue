@@ -105,8 +105,10 @@ export default {
       if (newVal) {
         this.isClosing = false;
         this.$refs.dialog?.showModal();
+        document.body.style.overflow = 'hidden';
       } else {
         this.$refs.dialog?.close();
+        document.body.style.overflow = ''; 
       }
     }
   },

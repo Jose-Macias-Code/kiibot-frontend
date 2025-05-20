@@ -8,7 +8,7 @@
       <div class="tooltip-content">
         <strong>Credenciales de prueba:</strong><br>
         Correo: <code>admin@gmail.com</code><br>
-        Contraseña: <code>123456</code>
+        Contraseña: <code>pass123</code>
       </div>
     </div>
 
@@ -72,7 +72,7 @@
 <script>
 const fake_user = {
   email: "admin@gmail.com",
-  password: "123456",
+  password: "pass123",
   name: "Jose",
   role: "admin",
   profile_photo: "https://i.pravatar.cc/150?img=3"
@@ -181,14 +181,17 @@ export default {
 }
 
 .input-group input {
-  width: 100%;
-  padding: 15px 12px 10px;
+  width: calc(100% + 10px); 
+  margin-left: -5px;        
+  margin-right: -5px;       
+  padding: 15px 12px 10px 12px;
   font-size: 1rem;
   border: 1px solid #c4c4c4;
   border-radius: 8px;
   outline: none;
   transition: border 0.3s ease, box-shadow 0.3s ease;
   background: transparent;
+  box-sizing: border-box;
 }
 
 .input-group label {

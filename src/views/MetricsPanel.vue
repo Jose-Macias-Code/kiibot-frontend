@@ -367,6 +367,11 @@ export default {
 
 /*  */
 @media (max-width: 520px) {
+  .metrics-panel {
+    padding: 5px;
+    margin: 1rem auto;
+  }
+
   .select-refresh-group .refresh-btn {
     display: none;
   }

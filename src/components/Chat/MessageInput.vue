@@ -622,19 +622,20 @@ export default {
 /* Responsive */
 @media (max-width: 768px) {
   .message-card {
-    padding: 0.8rem 1rem;
+    padding: 0.7rem 0.9rem;
     border-radius: 1rem;
   }
 
   .message-textarea {
     font-size: 0.9rem;
     line-height: 1.4;
+    max-height: 110px;
   }
 
   .bubble-button {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     padding: 0.4rem 0.6rem;
-    gap: 0.35rem;
+    gap: 0.3rem;
   }
 
   .bubble-button i {
@@ -665,81 +666,85 @@ export default {
   }
 
   .preview-file .file-details .file-name {
-    font-size: 0.75rem;
-    max-width: 150px;
+    font-size: 0.74rem;
+    max-width: 140px;
   }
 
   .preview-file .file-details .file-type {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
   }
 
   .toast-notification {
     font-size: 0.75rem;
-    padding: 0.4rem 1rem;
+    padding: 0.45rem 0.9rem;
     bottom: -2.5rem;
   }
 
   .close-modal-button {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     font-size: 1.4rem;
   }
 
   .modal-image-container img {
-    max-width: 70%;
+    max-width: 85%;
     max-height: 70%;
   }
 }
 
 @media (max-width: 480px) {
+  .message-input-wrappe {
+    max-width: 200px;
+  }
   .message-card {
-    padding: 0.7rem 0.9rem;
+    padding: 0.6rem 0.75rem;
   }
 
   .bubble-button {
-    font-size: 0.7rem;
-    padding: 0.35rem 0.55rem;
+    font-size: 0.66rem;
+    padding: 0.3rem 0.5rem;
   }
 
   .send-icon-button {
     width: 26px;
     height: 26px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 
   .message-textarea {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
+    max-height: 100px;
   }
 
   .preview-image {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
   }
 
   .preview-file {
-    height: 42px;
-    font-size: 0.7rem;
-    padding: 0.3rem 0.4rem;
+    height: 40px;
+    font-size: 0.68rem;
+    padding: 0.25rem 0.35rem;
   }
 
   .preview-file .file-icon {
-    width: 28px;
-    height: 28px;
-    font-size: 0.9rem;
+    width: 26px;
+    height: 26px;
+    font-size: 0.85rem;
   }
 
   .preview-file .file-details .file-name {
-    font-size: 0.7rem;
-    max-width: 130px;
+    font-size: 0.66rem;
+    max-width: 115px;
   }
 
   .preview-file .file-details .file-type {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
 
   .toast-notification {
-    font-size: 0.7rem;
-    padding: 0.35rem 0.9rem;
+    font-size: 0.68rem;
+    padding: 0.35rem 0.8rem;
   }
 }
 

@@ -119,7 +119,7 @@ export default {
 
 @media (max-width: 480px) {
   .chat-new-container {
-    padding: 1rem 0.5rem;
+    padding: 50% 0.5rem;
   }
 
   .chat-new-title {

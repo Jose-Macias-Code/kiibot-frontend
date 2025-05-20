@@ -281,6 +281,10 @@
 }
 
 @media (max-width: 480px) {
+  .options-container .section-box:nth-child(4) {
+    display: none !important;
+  }
+  
   .header-container {
     padding: 1rem 0.5rem;
     gap: 0.8rem;

@@ -306,11 +306,6 @@ export default {
 </script>
 
 <style scoped>
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-}
-
 .profile-page {
   max-width: 100%;
   padding: 16px;
@@ -866,15 +861,20 @@ html, body {
 }
 
 @media screen and (max-width: 480px) {
+  .profile-page {
+    padding: 5px;
+    margin: 3rem auto;
+  }
+
   .metric-card {
     padding: 16px 14px;
   }
 
   .metric-card .icon {
-    width: 42px;
-    height: 42px;
-    font-size: 18px;
-    margin-bottom: 12px;
+    width: 35px;
+    height: 35px;
+    font-size: 15px;
+    margin: 0 auto 12px auto; 
   }
 
   .logout-modal {
@@ -890,19 +890,5 @@ html, body {
   .logout-modal p {
     font-size: 18px;
   }
-}
-
-body {
-  overflow-x: hidden;
-}
-
-html {
-  overflow-x: hidden;
-  width: 100vw;
-}
-
-* {
-  box-sizing: border-box;
-  max-width: 100%;
 }
 </style>

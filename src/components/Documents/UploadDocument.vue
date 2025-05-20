@@ -121,6 +121,12 @@ export default {
         : `${sizeKB.toFixed(1)} KB`;
     },
   },
+  mounted() {
+    document.body.style.overflow = 'hidden';
+  },
+  beforeUnmount() {
+    document.body.style.overflow = '';
+  },
   methods: {
     handleFile(event) {
       const file = event.target.files[0];

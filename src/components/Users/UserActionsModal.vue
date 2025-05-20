@@ -130,8 +130,14 @@ export default {
     },
     isOpen(val) {
       const modal = this.$refs.dialog;
-      if (val && modal) modal.showModal();
-      if (!val && modal) modal.close();
+      if (val && modal) {
+        modal.showModal();
+        document.body.style.overflow = 'hidden'; 
+      }
+      if (!val && modal) {
+        modal.close();
+        document.body.style.overflow = ''; 
+      }
     }
   },
   computed: {
@@ -179,7 +185,7 @@ export default {
         return;
       }
 
-      this.successMessage = "Contraseña actualizada localmente (simulado)";
+      this.successMessage = "Contraseña actualizada";
       this.showPasswordInput = false;
       this.newUserPassword = "";
 
@@ -188,11 +194,11 @@ export default {
     togglePassword(field) {
       if (field === "new") this.showNewPassword = !this.showNewPassword;
     },
-   toggleRole() {
+    toggleRole() {
       if (this.selectedUser.is_online || this.isAnyLoading) return;
       const newRole = this.selectedUser.role === "admin" ? "user" : "admin";
       this.selectedUser.role = newRole;
-      this.successMessage = "Rol cambiado localmente (simulado)";
+      this.successMessage = `Rol cambiado a ${newRole === 'admin' ? 'Administrador' : 'Usuario'}`;
       this.$emit("change-role", { id: this.selectedUser.id, newRole });
       setTimeout(() => (this.successMessage = ""), 2000);
     },
@@ -206,7 +212,7 @@ export default {
     },
     deleteUser() {
       this.$emit("delete-user", this.selectedUser.id);
-      this.successMessage = "Usuario eliminado localmente";
+      this.successMessage = "Usuario eliminado";
       setTimeout(() => {
         this.successMessage = "";
         this.close();
@@ -649,8 +655,30 @@ input.error {
     width: 80%;
   }
   .input-group .toggle {
-    left: 18rem;
+    left: 17rem;
     transform: translateY(-50%);
+  }
+  .delete-confirm-box {
+    padding: 1rem 1rem;
+    text-align: center;
+    border-left: none;
+    border-top: 5px solid #e53935;
+  }
+  .delete-confirm-box p {
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+  .delete-confirm-box .modal-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .delete-confirm-box .confirm-btn,
+  .delete-confirm-box .cancel-btn {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 0.9rem;
   }
 }
 </style>

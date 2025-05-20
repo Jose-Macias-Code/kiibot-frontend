@@ -125,7 +125,7 @@ export default {
       id: 'msg1',
       role: 'user',
       versions: [
-        { content: '<p>Hola, ¿cómo funciona este sistema?</p>' }
+        { content: '<p>Hola, ¿hay alguien ahí?</p>' }
       ],
       activeVersion: 0
     },
@@ -133,7 +133,7 @@ export default {
       id: 'msg2',
       role: 'bot',
       versions: [
-        { content: '<p>Hola 👋 Este chat te permite enviar mensajes, editarlos y ver el historial de versiones.</p>' }
+        { content: '<p>¡Hola! Sí, estoy aquí para ayudarte.</p>' }
       ],
       activeVersion: 0
     },
@@ -141,7 +141,7 @@ export default {
       id: 'msg3',
       role: 'user',
       versions: [
-        { content: '<p>¿Qué tipo de contenido acepta?</p>' }
+        { content: '<p>¿Qué puedes hacer?</p>' }
       ],
       activeVersion: 0
     },
@@ -149,7 +149,7 @@ export default {
       id: 'msg4',
       role: 'bot',
       versions: [
-        { content: `<p>Puedes escribir texto normal, incluir listas, fragmentos de código y hasta fórmulas matemáticas usando KaTeX.</p>` }
+        { content: '<p>Puedo responder preguntas, ayudarte con tareas y mucho más.</p>' }
       ],
       activeVersion: 0
     },
@@ -157,27 +157,23 @@ export default {
       id: 'msg5',
       role: 'user',
       versions: [
-        { content: '<p>¿Y cómo se ve un bloque de código?</p>' }
+        { content: '<p>¿Cuál es la capital de Canadá?</p>' }
       ],
       activeVersion: 0
     },
     {
-  id: 'msg6',
-  role: 'bot',
-  versions: [
-    {
-      content: `<pre><div class="code-lang">js</div><code>function saludar(nombre) {
-  return \`Hola, \${nombre}!\`;
-}</code></pre>`
-    }
-  ],
-  activeVersion: 0
-},
+      id: 'msg6',
+      role: 'bot',
+      versions: [
+        { content: '<p>La capital de Canadá es Ottawa.</p>' }
+      ],
+      activeVersion: 0
+    },
     {
       id: 'msg7',
       role: 'user',
       versions: [
-        { content: '<p>¿Puedo usar listas?</p>' }
+        { content: '<p>Gracias, eso era todo.</p>' }
       ],
       activeVersion: 0
     },
@@ -185,13 +181,10 @@ export default {
       id: 'msg8',
       role: 'bot',
       versions: [
-        { content: `<ul>
-  <li>✅ Sí, listas ordenadas y desordenadas.</li>
-  <li>✅ También puedes usar texto <strong>en negrita</strong> o <em>cursiva</em>.</li>
-</ul>` }
+        { content: '<p>¡De nada! Si necesitas algo más, aquí estaré.</p>' }
       ],
       activeVersion: 0
-    },
+    }
   ]
 ]
     };
@@ -479,25 +472,27 @@ export default {
 
 <style scoped>
 .chat-wrapper {
-  position: relative;
   display: flex;
   flex-direction: column;
-  height: 92vh;
-  width: calc(100% + 17px);
+  height: 100dvh;
+  width: 100%;
 }
 
 .chat-input-fixed {
   position: sticky;
   bottom: 0;
+  background: white;
   z-index: 10;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .chat-history {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: auto; 
   display: flex;
   flex-direction: column;
   padding: 15px;
+  padding-bottom: 120px;
 }
 
 .chat-history::-webkit-scrollbar {
@@ -515,18 +510,18 @@ export default {
 
 .scroll-to-bottom {
   position: absolute;
-  right: 50%;
-  bottom: 110px; 
+  right: 1rem;
+  bottom: 6rem;
   background-color: white;
   border: 1px solid #d1d5db;
   border-radius: 50%;
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   font-size: 13px;
   color: #4b5563;
   cursor: pointer;
-  z-index: 100;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -951,94 +946,137 @@ del {
   text-decoration: line-through;
 }
 
-/* RESPONSIVE */
+/* EXTRA-RESPONSIVO para pantallas pequeñas */
 @media (max-width: 768px) {
   .chat-wrapper {
-    height: 88vh;
-    width: 100%;
-    padding: 0;
+    height: 85vh;
+    padding: 0 6px;
   }
 
   .chat-history {
-    padding: 10px;
+    padding: 8px;
   }
 
   .chat-bubble {
-    max-width: 90%;
+    max-width: 92%;
     font-size: 14px;
-    margin: 6px;
-  }
-
-  .bubble-inner {
-    padding: 10px 12px;
-  }
-
-  .edit-content {
-    font-size: 14px;
-  }
-
-  .message-actions {
-    font-size: 12px;
-  }
-
-  .version-counter {
-    font-size: 11px;
-  }
-
-  .edit-actions {
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-end;
-  }
-
-  .cancel-btn,
-  .save-btn {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 640px) {
-  .hide-on-mobile {
-    display: none !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .chat-bubble {
-    max-width: 96%;
-    font-size: 13px;
+    margin: 6px 4px;
   }
 
   .bubble-inner {
     padding: 8px 10px;
   }
 
+  .edit-content {
+    font-size: 13.5px;
+  }
+
+  .edit-actions {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .cancel-btn,
+  .save-btn {
+    font-size: 13.5px;
+    padding: 6px 10px;
+    width: 100%;
+  }
+
+  .scroll-to-bottom {
+    bottom: 95px;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+
+  .copy-btn,
+  .code-lang {
+    font-size: 11px;
+    top: 6px;
+    right: 6px;
+  }
+
+  pre code {
+    font-size: 13.2px;
+    padding: 10px;
+  }
+
   .dot {
     width: 8px;
     height: 8px;
   }
+}
 
-  .copy-btn {
-    top: 6px;
-    right: 6px;
-    font-size: 10px;
+@media (max-width: 480px) {
+  .chat-wrapper {
+    padding: 0;
+    margin: 1rem auto;
   }
 
-  .code-lang {
-    top: 6px;
-    left: 6px;
-    font-size: 10px;
+  .chat-bubble {
+    max-width: 97%;
+    font-size: 13px;
+    margin: 4px 2px;
   }
 
-  .chat-input-fixed {
-    padding: 0 6px;
+  .bubble-inner {
+    padding: 6px 9px;
+  }
+
+  .chat-wrapper {
+    height: 82vh;
+  }
+
+  .edit-actions {
+    gap: 4px;
+  }
+
+  .cancel-btn,
+  .save-btn {
+    font-size: 13px;
+    padding: 5px 9px;
+  }
+
+  .scroll-to-bottom {
+    bottom: 6rem;
+    right: 1rem;  
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .message-actions {
+    font-size: 11px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
   }
 
   pre code {
-    font-size: 13px;
+    font-size: 12.5px;
+  }
+
+  .markdown-body table {
+    font-size: 12px;
+  }
+
+  .markdown-body th,
+  .markdown-body td {
     padding: 10px;
+  }
+
+  .markdown-body img {
+    max-height: 240px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hide-on-mobile {
+    display: none !important;
   }
 }
 

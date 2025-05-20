@@ -138,8 +138,8 @@ export default {
       return this.documents.filter((doc) => {
         return (
           doc.name.toLowerCase().includes(query) ||
-          doc.user.toLowerCase().includes(query) ||
-          doc.status.toLowerCase().includes(query)
+          doc.status.toLowerCase().includes(query) ||
+          doc.date.toLowerCase().includes(query)
         );
       });
     },
@@ -587,6 +587,12 @@ export default {
 }
 
 @media (max-width: 480px) {
+  .documents-panel {
+    padding: 5px;
+    margin: 1rem auto;
+    max-height: 50%;
+  }
+
   .documents-header {
     padding: 0.8rem;
     gap: 0.8rem;

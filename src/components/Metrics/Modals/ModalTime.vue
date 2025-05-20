@@ -44,6 +44,7 @@ export default {
   },
   mounted() {
     this.openDialog();
+    document.body.style.overflow = 'hidden'; 
   },
   methods: {
     openDialog() {
@@ -57,6 +58,7 @@ export default {
       if (dialog && typeof dialog.close === 'function') {
         dialog.close();
       }
+      document.body.style.overflow = ''; 
       this.$emit('close');
       this.resetForm();
     },
@@ -97,12 +99,19 @@ export default {
       this.customEnd = '';
       this.validationError = '';
     }
+  },
+  beforeUnmount() {
+    document.body.style.overflow = ''; 
   }
 };
 </script>
 
 <style scoped>
 .time-filter-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border: none;
   border-radius: 14px;
   padding: 0;
@@ -110,19 +119,20 @@ export default {
   max-width: 540px;
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.15);
   font-family: 'Poppins', sans-serif;
+  background-color: white;
   animation: simpleFadeIn 0.3s ease-out;
   overflow: hidden;
-  background-color: white;
+  z-index: 1000;
 }
 
 @keyframes simpleFadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    scale: 0.95;
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    scale: 1;
   }
 }
 
@@ -246,23 +256,59 @@ export default {
 }
 
 @media (max-width: 520px) {
+  .time-filter-modal {
+    max-width: 90%;
+    border-radius: 12px;
+    margin: 0 auto;
+  }
+
   .modal-content {
     padding: 1.2rem;
   }
 
-  .time-filter-modal .modal-header {
+  .modal-header {
     flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem 1.2rem;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
   }
 
   .modal-title {
     font-size: 1.1rem;
     text-align: center;
+    justify-content: center;
+  }
+
+  .time-form {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .time-field label {
+    font-size: 0.9rem;
+  }
+
+  .time-field input[type="time"] {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.9rem;
+    width: 88%;
+  }
+
+  .confirm-btn,
+  .cancel-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.95rem;
   }
 
   .modal-actions {
     justify-content: center;
+    padding: 1rem;
+  }
+
+  .form-error-message {
+    font-size: 0.85rem;
+    text-align: center;
   }
 }
 </style>
